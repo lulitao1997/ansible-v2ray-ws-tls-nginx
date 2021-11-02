@@ -1,0 +1,31 @@
+---
+# tasks file for ansible-v2ray-ws-tls-nginx
+
+- name: Install v2ray
+  shell:
+    cmd: bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+    executable: /bin/bash
+
+- name: Install nginx config
+  template:
+    src: templates/v2ray_nginx
+    dest: /etc/nginx/sites-enabled/{{ v2ray_domain }}
+
+- name: Install v2ray config
+  template:
+    src: templates/v2ray.json
+    dest: /usr/local/etc/v2ray/config.json
+
+- systemd: daemon_reload=yes
+
+- name: Enable v2ray service
+  systemd:
+    name: v2ray.service
+    enabled: yes
+    state: restarted
+
+- name: Enable nginx service
+  systemd:
+    name: nginx.service
+    enabled: yes
+    state: restarted

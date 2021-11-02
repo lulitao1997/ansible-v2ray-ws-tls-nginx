@@ -1,0 +1,32 @@
+{
+  "inbounds": [
+    {
+      "port": {{ v2ray_listen_port }},
+      "listen": "127.0.0.1",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{ v2ray_uuid }}",
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "{{ v2ray_ws_path }}"
+        },
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}

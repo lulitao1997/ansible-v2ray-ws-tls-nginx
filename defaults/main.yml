@@ -1,0 +1,12 @@
+---
+# defaults file for ansible-v2ray-ws-tls-nginx
+v2ray_listen_port: 58600
+# v2ray_uuid: 6e7be126-02fe-f3ba-fd22-b56b6564cb15
+v2ray_ws_path: /
+
+certbot_create_if_missing: true
+certbot_certs:
+- email: "{{ v2ray_cert_email }}"
+  domains:
+  - "{{ v2ray_domain }}"
+
